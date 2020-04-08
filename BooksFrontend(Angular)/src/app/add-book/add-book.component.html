@@ -1,0 +1,17 @@
+
+  <form class="mat-form" [formGroup]="BookForm">
+    <mat-form-field class="form-width">
+      <input matInput placeholder="Book ID" formControlName="id_book">
+    </mat-form-field>
+  
+    <mat-form-field class="form-width">
+      <input matInput placeholder="Book Name" formControlName="nameBook">
+    </mat-form-field>
+
+    <mat-form-field class="form-width">
+      <input matInput placeholder="Book Author" formControlName="nameAuthor">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="UpdateBook()" *ngIf="showEdit">Update</button>
+    <button mat-raised-button color="primary" (click)="onAdd()" *ngIf="!showEdit" class="btn">Submit</button>
+  </form>

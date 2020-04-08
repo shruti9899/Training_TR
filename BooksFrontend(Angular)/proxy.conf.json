@@ -1,0 +1,11 @@
+{
+    "/api/": {
+      "target": "https://localhost:44344",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "headers": {
+        "Referer": "https://localhost:44344"
+      }
+    }
+}

@@ -1,0 +1,51 @@
+<br>
+<div class="search-div">
+    <button mat-raised-button color="primary" [routerLink]="[ '/addBook' ]" style="font-size: 20px;"><mat-icon>add</mat-icon>Add Book</button>
+    <mat-form-field class="search-form-field">
+        <input matInput [(ngModel)]="searchkey" placeholder="Search" autocomplete="off" (keyup)="applyfilter()">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchkey" (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
+<br>
+<br>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="books" matSort>
+        <ng-container matColumnDef="id_book">
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>ID</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.id_book}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nameBook" >
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Book</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.nameBook}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="nameAuthor" >
+            <mat-header-cell *matHeaderCellDef  mat-sort-header>Author</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.nameAuthor}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let ro">
+                <button mat-icon-button [routerLink]="[ '/updateBook', ro.id_book ]" title="Update"><mat-icon>launch</mat-icon></button>
+                <button mat-icon-button color="warn" (click)="DeleteBook(ro.id_book)" title="Delete"><mat-icon>delete_outline</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Loading data..
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="NoData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No Data..
+            </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':books!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['NoData']" [ngClass]="{'hide':!(books!=null && books.data.length==0)}"></mat-footer-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5,10,25,100]" [pageSize]="5"></mat-paginator>
+</div>
